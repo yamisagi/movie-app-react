@@ -1,11 +1,49 @@
 import React, { createContext, useContext } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../auth/firebase";
 
-// useContext içerisinde kullanabilmek için export ediyoruz.
-
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  return <AuthContext.Provider value={null}>{children}</AuthContext.Provider>;
+  const createUser = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log(user);
+      if (!user) {
+        console.log("User not found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ createUser, signIn }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuthContext = () => {

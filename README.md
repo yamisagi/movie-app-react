@@ -71,6 +71,7 @@ In this project I'm using React, React Router, Firebase, and The Movie Database 
 - [x] React Router
 - [x] Firebase Authentication
 - [x] React Context API
+- [x] Implement Sign In & Sign Up functionality
 
 
 <p align="center">(Still working on it...)</p>
