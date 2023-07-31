@@ -68,6 +68,10 @@ In this project I'm using React, React Router, Firebase, and The Movie Database 
 ## Roadmap
 
 - [x] Project Setup
+- [x] React Router
+- [x] Firebase Authentication
+- [x] React Context API
+
 
 <p align="center">(Still working on it...)</p>
 

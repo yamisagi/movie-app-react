@@ -8,6 +8,9 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const currentUser = {
+    displayName: "Eren Yeager",
+  };
   return (
     <>
       <Disclosure
@@ -20,6 +23,9 @@ export default function Navbar() {
               React Movie App
             </Link>
             <div className="absolute inset-y-0 right-0 flex items-center ">
+              {currentUser && (
+                <h5 className="mr-3">{currentUser.displayName}</h5>
+              )}
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
                 <div>
@@ -28,7 +34,7 @@ export default function Navbar() {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="h-8 w-8 rounded-full"
-                      src={avatar}
+                      src={currentUser?.photoURL || avatar}
                       alt="user"
                     />
                   </Menu.Button>
