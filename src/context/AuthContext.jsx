@@ -4,10 +4,12 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../auth/firebase";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
+  let navigate = useNavigate();
   const createUser = async (email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -17,6 +19,10 @@ const AuthContextProvider = ({ children }) => {
       );
       const user = userCredential.user;
       console.log(user);
+      if (!user) {
+        console.log("User not found");
+      }
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -34,6 +40,7 @@ const AuthContextProvider = ({ children }) => {
       if (!user) {
         console.log("User not found");
       }
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
