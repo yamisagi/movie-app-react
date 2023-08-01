@@ -75,7 +75,14 @@ In this project I'm using React, React Router, Firebase, and The Movie Database 
 - [x] Implement Sign Out functionality
 - [x] Implement Sign In with Google functionality
 - [x] React Router URL Parameters
-
+- [x] React Router Switch
+- [x] React Router Redirect
+- [x] Private Routes with React Router
+- [x] Implement a Search Bar
+- [x] Implement Movie Context API
+- [x] Implement Movie Details Page 
+- [x] Styling with Tailwind CSS
+- [x] Product Finalization
 
 
 <p align="center">(Still working on it...)</p>

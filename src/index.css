@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
 
 /** element bazında default olarak vermek istediğimiz stilleri base layer'da veriyoruz */
 @layer base {
@@ -29,7 +29,7 @@
 }
 
 body {
-  font-family: "Poppins", "sans-serif";
+  font-family: 'Poppins', 'sans-serif';
   margin: 0;
 }
 
@@ -66,15 +66,22 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
+.movie-over h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 .movie:hover .movie-over {
   transform: translateX(0%);
 }
 
 .tag {
   border-radius: 5px;
-  padding: 0.7rem;
+  padding: 0.5rem;
   font-weight: bold;
-  width: 3rem;
+  width: 4rem;
   text-align: center;
 }
 
@@ -120,10 +127,9 @@ body {
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus
-input:-webkit-autofill{
+input:-webkit-autofill:focus input:-webkit-autofill {
   -webkit-text-fill-color: black !important;
-  -webkit-box-shadow: 0 0 0px 0px #28292D inset !important;
-  box-shadow: 0 0 0px 0px #28292D inset !important;
+  -webkit-box-shadow: 0 0 0px 0px #28292d inset !important;
+  box-shadow: 0 0 0px 0px #28292d inset !important;
   transition: background-color 5000s ease-in-out 0s !important;
 }
