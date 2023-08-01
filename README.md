@@ -72,6 +72,10 @@ In this project I'm using React, React Router, Firebase, and The Movie Database 
 - [x] Firebase Authentication
 - [x] React Context API
 - [x] Implement Sign In & Sign Up functionality
+- [x] Implement Sign Out functionality
+- [x] Implement Sign In with Google functionality
+- [x] React Router URL Parameters
+
 
 
 <p align="center">(Still working on it...)</p>
