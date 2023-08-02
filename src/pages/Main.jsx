@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMovieContext } from '../context/MovieContext';
 import MovieCard from '../components/MovieCard';
 import { useAuthContext } from '../context/AuthContext';
 import { toastWarnNotify } from '../utils/ToastMessage';
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
+const FEATURED_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
 const Main = () => {
   const { movies, loading, getMovies } = useMovieContext();
   const { currentUser } = useAuthContext();
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchButtonClicked, setSearchButtonClicked] = useState(false);
+
+  useEffect(() => {
+    console.log('Running');
+    const delayedSearch = setTimeout(() => {
+      if (searchButtonClicked && searchTerm) {
+        console.log('searching');
+        getMovies(SEARCH_API + searchTerm);
+      } else if (!searchTerm && searchButtonClicked) {
+        console.log('not searching');
+        getMovies(FEATURED_API);
+        searchButtonClicked && setSearchButtonClicked(false);
+      }
+    }, 500);
+    return () => clearTimeout(delayedSearch);
+  }, [searchTerm, searchButtonClicked]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,24 +40,39 @@ const Main = () => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit} className='flex justify-center p-2 mt-2'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex justify-center p-2 mt-2 gap-2'
+      >
         <input
           type='search'
-          className='w-80 h-8 rounded-md p-1 m-2'
+          className='w-80 h-auto rounded-md p-2'
           placeholder='Search a movie...'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className='btn-danger-bordered'>Search</button>
+
+        <button
+          class='search-button'
+          onClick={() => setSearchButtonClicked(true)}
+        >
+          Search
+        </button>
       </form>
-      <div className={'flex justify-center flex-wrap'}>
+      <div
+        className={
+          'flex m-auto justify-center items-center flex-wrap container'
+        }
+      >
         <div
-          className='movie-container
-          xl:grid xl:grid-cols-5 xl:gap-5
-          lg:grid lg:grid-cols-4 lg:gap-4
-          md:grid md:grid-cols-3 md:gap-3
-          sm:grid sm:grid-cols-2 sm:gap-2
-          xs:grid xs:grid-cols-1 xs:gap-1
+          className='flex flex-wrap justify-center items-center 
+        container 
+        sm:grid-cols-2
+        md:grid-cols-3
+        lg:grid-cols-4
+        xl:grid-cols-5
+        2xl:grid-cols-6
+        gap-4  
         '
         >
           {loading && (
@@ -53,9 +85,11 @@ const Main = () => {
               </div>
             </div>
           )}
-          {movies.map((movie) => (
-            <MovieCard key={movie.id} {...movie} />
-          ))}
+          {!loading &&
+            movies
+              .sort((a, b) => b.vote_average - a.vote_average)
+              .map((movie) => <MovieCard key={movie.id} {...movie} />)
+          }
         </div>
       </div>
     </>

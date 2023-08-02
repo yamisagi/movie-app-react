@@ -21,12 +21,21 @@ export default function Navbar() {
         <div className='mx-auto px-2 sm:px-6 lg:px-8'>
           <div className='relative flex items-center justify-between'>
             <Link className='pr-2 text-2xl font-semibold' to='/'>
-              React Movie App
+              Movie App 🎥
             </Link>
 
-            <div className='absolute inset-y-0 right-0 flex items-center '>
+            <div
+              className='absolute inset-y-0 right-0 flex items-center
+            '
+            >
               {currentUser && (
-                <h5 className='mr-3'>{currentUser?.displayName}</h5>
+                <h5
+                  className='mr-3 
+                hidden sm:block text-sm font-medium
+                '
+                >
+                  {currentUser?.displayName}
+                </h5>
               )}
               <Switch />
               {/* Profile dropdown */}

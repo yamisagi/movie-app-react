@@ -83,6 +83,10 @@ In this project I'm using React, React Router, Firebase, and The Movie Database 
 - [x] Implement Movie Details Page 
 - [x] Styling with Tailwind CSS
 - [x] Product Finalization
+- [x] Fix Search Functionality
+- [x] Fix Movie Details Page
+- [x] Sort Movie List by Vote Average
+- [x] Product Ready to Deploy 🚀
 
 
 <p align="center">(Still working on it...)</p>
