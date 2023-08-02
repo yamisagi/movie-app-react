@@ -7,6 +7,7 @@ import {
   updateProfile,
   signInWithPopup,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { auth } from '../auth/firebase';
 import { useNavigate } from 'react-router-dom';
@@ -90,19 +91,29 @@ const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
 
     try {
-      signInWithPopup(auth, provider);
+     await signInWithPopup(auth, provider);
       toastSuccessNotify('Signed in successfully');
       navigate('/');
     } catch (error) {
       console.log(error.code);
+      console.log(error.message);
       toastErrorNotify(errorMessages[error.code]);
     }
   };
-  
+
+  const forgotPassword = (email) => {
+    try {
+      sendPasswordResetEmail(auth, email);
+      toastSuccessNotify('Reset password link sent to your email');
+    }catch(error){
+      console.log(error.code);
+      toastErrorNotify(errorMessages[error.code]);
+    }
+  };
 
   return (
     <AuthContext.Provider
-      value={{ createUser, signIn, logOut, currentUser, signUpProvider }}
+      value={{ createUser, signIn, logOut, currentUser, signUpProvider, forgotPassword }}
     >
       {children}
     </AuthContext.Provider>

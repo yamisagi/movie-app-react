@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import GoogleIcon from '../assets/icons/GoogleIcon';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import { toastErrorNotify } from '../utils/ToastMessage';
 const Login = () => {
-  const { signIn, signUpProvider } = useAuthContext();
+  const { signIn, signUpProvider, forgotPassword } = useAuthContext();
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -51,7 +52,15 @@ const Login = () => {
           <div className='flex justify-between items-center mb-6'>
             {/* TODO: Add Forgot password functionality */}
             <span className='text-red-main'>Forgot password?</span>
-            <Link to='/register' className='text-red-main'>
+            <Link
+              to='/register'
+              className='text-red-main'
+              onClick={() => {
+                if (user.email) {
+                  forgotPassword(user.email);
+                }
+              }}
+            >
               Sign Up
             </Link>
           </div>
