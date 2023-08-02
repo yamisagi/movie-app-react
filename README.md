@@ -61,10 +61,6 @@
 <!-- add asset here later -->
 <!--<img src="https://github.com/yamisagi/us/blob/main/assets/product.gif" width="350" height="550"> -->
 
-
-https://github.com/yamisagi/movie-app-react/assets/84624853/5cfeb515-3d69-4f8c-8e86-27940de5b701
-
-
 In this project I'm using React, React Router, Firebase, and The Movie Database API. I'm also using React Hooks, React Context API & Firebase Authentication to build this project.
 
 <!-- ROADMAP -->

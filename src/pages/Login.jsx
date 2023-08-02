@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GoogleIcon from '../assets/icons/GoogleIcon';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
-import { toastErrorNotify } from '../utils/ToastMessage';
+
 const Login = () => {
   const { signIn, signUpProvider, forgotPassword } = useAuthContext();
   const [user, setUser] = useState({

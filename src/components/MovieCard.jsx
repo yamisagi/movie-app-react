@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
 const IMG_API = 'https://image.tmdb.org/t/p/w1280';
@@ -30,9 +30,16 @@ const MovieCard = ({ poster_path, title, overview, vote_average, id }) => {
       />
       <div className='movie-info flex justify-between items-center h-16 w-100 p-2 text-center text-white'>
         <h5 className='w-40 text-center my-5'>{title}</h5>
-        {currentUser && (
+        {currentUser ? (
           <span
             className={`tag ${getVoteClass(vote_average)} my-auto text-center`}
+          >
+            {vote_average.toFixed(1)}
+          </span>
+        ) : (
+          <span
+            className={`tag ${getVoteClass(vote_average)} my-auto text-center`}
+            style={{ filter: 'blur(5px)' }}
           >
             {vote_average.toFixed(1)}
           </span>
@@ -40,7 +47,17 @@ const MovieCard = ({ poster_path, title, overview, vote_average, id }) => {
       </div>
       <div className='movie-over'>
         <h2>Overview</h2>
-        <p>{overview}</p>
+        {currentUser ? (
+          <p>{overview}</p>
+        ) : (
+          <h2>
+            Please{' '}
+            <Link className='text-red-main' to={'/login'}>
+              Login
+            </Link>{' '}
+            to see the overview
+          </h2>
+        )}
       </div>
     </div>
   );

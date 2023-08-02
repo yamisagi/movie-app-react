@@ -42,12 +42,11 @@ const Main = () => {
     <>
       <form
         onSubmit={handleSubmit}
-        className='flex justify-center p-2 mt-2 gap-2'
-      >
+        className='flex justify-center p-2 mt-2 gap-2'>
         <input
           type='search'
-          className='w-80 h-auto rounded-md p-2'
-          placeholder='Search a movie...'
+          className='h-14 rounded-md p-2 w-96'
+            placeholder='Search a movie...'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -69,10 +68,10 @@ const Main = () => {
         container 
         sm:grid-cols-2
         md:grid-cols-3
-        lg:grid-cols-4
-        xl:grid-cols-5
-        2xl:grid-cols-6
-        gap-4  
+        lg:grid-cols-6
+        xl:grid-cols-6
+        2xl:grid-cols-7
+        gap-3  
         '
         >
           {loading && (
