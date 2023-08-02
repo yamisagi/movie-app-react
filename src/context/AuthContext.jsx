@@ -90,9 +90,7 @@ const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
 
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log(user);
+      signInWithPopup(auth, provider);
       toastSuccessNotify('Signed in successfully');
       navigate('/');
     } catch (error) {
@@ -100,6 +98,8 @@ const AuthContextProvider = ({ children }) => {
       toastErrorNotify(errorMessages[error.code]);
     }
   };
+  
+
   return (
     <AuthContext.Provider
       value={{ createUser, signIn, logOut, currentUser, signUpProvider }}
