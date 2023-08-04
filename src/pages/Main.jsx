@@ -16,37 +16,34 @@ const Main = () => {
   useEffect(() => {
     console.log('Running');
     const delayedSearch = setTimeout(() => {
-      if (searchButtonClicked && searchTerm) {
+      if (searchButtonClicked && searchTerm && currentUser) {
         console.log('searching');
         getMovies(SEARCH_API + searchTerm);
-      } else if (!searchTerm && searchButtonClicked) {
+      } else if (!searchTerm && searchButtonClicked && currentUser) {
         console.log('not searching');
         getMovies(FEATURED_API);
         searchButtonClicked && setSearchButtonClicked(false);
       }
     }, 500);
     return () => clearTimeout(delayedSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, searchButtonClicked]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (currentUser && searchTerm) {
-      getMovies(SEARCH_API + searchTerm);
-    } else if (!currentUser) {
-      toastWarnNotify('Please log in to search movies');
-    } else {
-      toastWarnNotify('please enter a text');
-    }
-  };
   return (
     <>
       <form
-        onSubmit={handleSubmit}
-        className='flex justify-center p-2 mt-2 gap-2'>
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (!currentUser) {
+            toastWarnNotify('Please login to search movies');
+          }
+        }}
+        className='flex justify-center p-2 mt-2 gap-2'
+      >
         <input
           type='search'
           className='h-14 rounded-md p-2 w-96'
-            placeholder='Search a movie...'
+          placeholder='Search a movie...'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -87,8 +84,7 @@ const Main = () => {
           {!loading &&
             movies
               .sort((a, b) => b.vote_average - a.vote_average)
-              .map((movie) => <MovieCard key={movie.id} {...movie} />)
-          }
+              .map((movie) => <MovieCard key={movie.id} {...movie} />)}
         </div>
       </div>
     </>
